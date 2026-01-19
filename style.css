@@ -19,7 +19,6 @@
     --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
     
-    /* Trip Type Colors - Light Mode */
     --beach-color: #57f4d7;
     --winter-color: #95f8ff;
     --city-color: #7209b7;
@@ -27,7 +26,6 @@
     --mountain-color: #3c3351f1;
     --forest-color: #05ff6d;
     
-    /* Trip Type Backgrounds - Light Mode */
     --beach-bg: linear-gradient(135deg, #ffdf54 0%, #f0f9ff 100%);
     --winter-bg: linear-gradient(135deg, #ff9090 0%, #f0f8ff 100%);
     --city-bg: linear-gradient(135deg, #ff36da 0%, #f9f0ff 100%);
@@ -35,7 +33,6 @@
     --mountain-bg: linear-gradient(135deg, #9022ff 0%, #fff0f8 100%);
     --forest-bg: linear-gradient(135deg, #90fb05 0%, #f0fffb 100%);
     
-    /* Trip Type Colors - Dark Mode */
     --beach-dark: #57eef4;
     --winter-dark: #95f8ff;
     --city-dark: #7209b7;
@@ -43,7 +40,6 @@
     --mountain-dark: #3c3351f1;
     --forest-dark: #05ff6d;
     
-    /* Trip Type Backgrounds - Dark Mode */
     --beach-bg-dark: linear-gradient(135deg, #1e1e2e 0%, #0f2b3d 100%);
     --winter-bg-dark: linear-gradient(135deg, #1e1e2e 0%, #0f1f3d 100%);
     --city-bg-dark: linear-gradient(135deg, #1e1e2e 0%, #1f0f3d 100%);
@@ -66,7 +62,6 @@ body {
     padding: 20px;
 }
 
-/* Header */
 .header {
     text-align: center;
     margin-bottom: 40px;
@@ -107,7 +102,6 @@ body {
     font-style: italic;
 }
 
-/* Theme Toggle */
 .theme-toggle {
     position: absolute;
     top: 20px;
@@ -139,13 +133,11 @@ body {
     font-size: 1.2rem;
 }
 
-/* Main Content */
 .main-content {
     display: grid;
     gap: 30px;
 }
 
-/* Sections */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -163,7 +155,6 @@ body {
     gap: 10px;
 }
 
-/* Buttons */
 .btn {
     padding: 10px 20px;
     border: none;
@@ -207,7 +198,6 @@ body {
     font-size: 0.9rem;
 }
 
-/* Add Activity Button */
 #add-activity-btn {
     background: var(--primary);
     color: white;
@@ -230,7 +220,6 @@ body {
     box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
 }
 
-/* Trips Container */
 .trips-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -348,12 +337,10 @@ body {
     transition: var(--transition);
 }
 
-/* Empty State */
 .empty-state {
     display: none;
 }
 
-/* Trip Type Specific Colors */
 .trip-card[data-type="beach"] {
     border-left: 5px solid var(--beach-color);
     background: var(--beach-bg);
@@ -384,7 +371,6 @@ body {
     background: var(--forest-bg);
 }
 
-/* Delete Trip Button */
 .delete-trip-btn {
     background: linear-gradient(135deg, #ff6b6b, #ff4757);
     color: white;
@@ -406,7 +392,6 @@ body {
     background: linear-gradient(135deg, #ff4757, #ff3838);
 }
 
-/* Tabs */
 .tabs {
     display: flex;
     background: white;
@@ -465,7 +450,6 @@ body {
     border-bottom: 2px solid var(--light-gray);
 }
 
-/* Days & Activities */
 .days-container {
     display: grid;
     gap: 20px;
@@ -514,6 +498,8 @@ body {
     transition: var(--transition);
     border-left: 4px solid transparent;
     position: relative;
+    flex-wrap: wrap;
+    word-break: break-word;
 }
 
 .activity-item:hover {
@@ -528,10 +514,12 @@ body {
     color: var(--primary);
     min-width: 70px;
     font-size: 0.95rem;
+    flex-shrink: 0;
 }
 
 .activity-details {
     flex: 1;
+    min-width: 0;
 }
 
 .activity-title {
@@ -539,20 +527,37 @@ body {
     margin-bottom: 5px;
     font-size: 1.1rem;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
+    word-break: break-word;
+    line-height: 1.4;
 }
 
 .activity-notes {
     font-size: 0.9rem;
     color: var(--gray);
-    line-height: 1.4;
+    line-height: 1.5;
+    margin-top: 5px;
+    max-height: 60px;
+    overflow-y: auto;
+    padding-right: 5px;
+    word-break: break-word;
+}
+
+.activity-notes::-webkit-scrollbar {
+    width: 4px;
+}
+
+.activity-notes::-webkit-scrollbar-thumb {
+    background: var(--light-gray);
+    border-radius: 2px;
 }
 
 .activity-actions {
     display: flex;
     gap: 8px;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .completed-checkbox {
@@ -578,7 +583,6 @@ body {
     background: var(--light-gray);
 }
 
-/* Delete Activity Button */
 .delete-activity-btn {
     background: none;
     border: none;
@@ -597,7 +601,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Budget Section */
 .budget-overview {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -693,6 +696,8 @@ input, select, textarea {
     font-size: 1rem;
     transition: var(--transition);
     background: white;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -720,6 +725,8 @@ input:focus, select:focus, textarea:focus {
     border-bottom: 1px solid var(--light-gray);
     transition: var(--transition);
     border-radius: 8px;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
 .expense-item:hover {
@@ -746,7 +753,6 @@ input:focus, select:focus, textarea:focus {
     color: var(--dark);
 }
 
-/* Packing Section */
 .packing-header {
     display: flex;
     justify-content: space-between;
@@ -834,6 +840,8 @@ input:focus, select:focus, textarea:focus {
     background: var(--light);
     border-radius: 8px;
     transition: var(--transition);
+    min-height: 50px;
+    word-break: break-word;
 }
 
 .packing-item:hover {
@@ -847,6 +855,7 @@ input:focus, select:focus, textarea:focus {
     height: 18px;
     cursor: pointer;
     accent-color: var(--success);
+    flex-shrink: 0;
 }
 
 .packing-item label {
@@ -856,6 +865,10 @@ input:focus, select:focus, textarea:focus {
     display: flex;
     align-items: center;
     gap: 8px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    margin-right: 10px;
+    line-height: 1.4;
 }
 
 .packing-item.checked label {
@@ -864,7 +877,6 @@ input:focus, select:focus, textarea:focus {
     opacity: 0.7;
 }
 
-/* Packing Item Delete Button */
 .packing-item-delete-btn {
     background: none;
     border: none;
@@ -876,12 +888,13 @@ input:focus, select:focus, textarea:focus {
     transition: var(--transition);
     opacity: 0.6;
     flex-shrink: 0;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Expense Item Delete Button */
 .expense-delete-btn {
     background: none;
     border: none;
@@ -904,7 +917,6 @@ input:focus, select:focus, textarea:focus {
     transform: scale(1.1);
 }
 
-/* Update expense item layout */
 .expense-item {
     display: flex;
     justify-content: space-between;
@@ -973,7 +985,6 @@ input:focus, select:focus, textarea:focus {
     gap: 10px;
 }
 
-/* Dark Mode Styles */
 body.dark-mode .expense-item {
     border-bottom-color: #3d3d5c;
 }
@@ -1002,7 +1013,6 @@ body.dark-mode .expense-delete-btn:hover {
     background: rgba(255, 107, 107, 0.2);
 }
 
-/* Dark Mode Category Colors */
 body.dark-mode .expense-category.food {
     background: rgba(255, 179, 193, 0.2);
     color: #ffb3c1;
@@ -1068,7 +1078,6 @@ body.dark-mode .packing-item-delete-btn:hover {
     background: rgba(255, 107, 107, 0.2);
 }
 
-/* Summary Section */
 .summary-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1179,7 +1188,6 @@ body.dark-mode .packing-item-delete-btn:hover {
     transition: width 0.5s ease;
 }
 
-/* Modals */
 .modal {
     position: fixed;
     top: 0;
@@ -1283,7 +1291,6 @@ body.dark-mode .packing-item-delete-btn:hover {
     margin-top: 30px;
 }
 
-/* Delete Warning Modal */
 .delete-warning {
     text-align: center;
     padding: 20px;
@@ -1357,7 +1364,6 @@ body.dark-mode .packing-item-delete-btn:hover {
     box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
 }
 
-/* Empty States */
 .empty-text {
     text-align: center;
     color: var(--gray);
@@ -1366,7 +1372,6 @@ body.dark-mode .packing-item-delete-btn:hover {
     opacity: 0.7;
 }
 
-/* Footer */
 .footer {
     text-align: center;
     margin-top: 50px;
@@ -1389,7 +1394,6 @@ body.dark-mode .packing-item-delete-btn:hover {
     min-height: 24px;
 }
 
-/* Dark Mode Styles */
 body.dark-mode {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     color: #e6e6e6;
@@ -1674,7 +1678,6 @@ body.dark-mode .activity-to-delete-info p {
     color: #a8a8a8;
 }
 
-/* Animation for quote rotation */
 @keyframes fadeInOut {
     0%, 100% { opacity: 0; }
     10%, 90% { opacity: 1; }
@@ -1684,7 +1687,6 @@ body.dark-mode .activity-to-delete-info p {
     animation: fadeInOut 5s ease-in-out infinite;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .container {
         padding: 15px;
@@ -1711,6 +1713,7 @@ body.dark-mode .activity-to-delete-info p {
         flex-direction: column;
         gap: 15px;
         align-items: stretch;
+        padding: 0 15px 15px;
     }
 
     .delete-trip-btn {
@@ -1725,15 +1728,45 @@ body.dark-mode .activity-to-delete-info p {
 
     .expense-form {
         grid-template-columns: 1fr;
+        gap: 12px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .expense-form select,
+    .expense-form input,
+    .expense-form button {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 16px;
+        box-sizing: border-box;
     }
 
     .form-row {
         grid-template-columns: 1fr;
     }
 
-    .budget-overview,
-    .summary-cards {
-        grid-template-columns: 1fr;
+    .budget-overview {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .budget-card {
+        padding: 20px 15px;
+        min-height: 100px;
+    }
+
+    .budget-card h4 {
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+    }
+
+    .budget-amount,
+    .budget-spent,
+    .budget-remaining,
+    .budget-percentage {
+        font-size: 1.4rem;
     }
 
     .packing-lists {
@@ -1743,6 +1776,12 @@ body.dark-mode .activity-to-delete-info p {
     .packing-header {
         flex-direction: column;
         align-items: stretch;
+        padding: 20px 15px;
+        gap: 20px;
+    }
+
+    .summary-cards {
+        grid-template-columns: 1fr;
     }
 
     .summary-details {
@@ -1762,9 +1801,160 @@ body.dark-mode .activity-to-delete-info p {
     .delete-activity-btn {
         font-size: 1rem;
     }
+
+    .budget-controls {
+        padding: 20px 15px;
+    }
+
+    .budget-controls .input-with-btn {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .budget-controls .input-with-btn input,
+    .budget-controls .input-with-btn button {
+        width: 100%;
+    }
+
+    .tab-content {
+        padding: 15px;
+        overflow-x: hidden;
+    }
+
+    .trip-details-section {
+        overflow-x: hidden;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .activity-item {
+        flex-wrap: wrap;
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .activity-time {
+        flex: 0 0 auto;
+        order: 1;
+    }
+
+    .activity-details {
+        flex: 1 1 100%;
+        order: 3;
+        margin-top: 10px;
+    }
+
+    .activity-title {
+        font-size: 0.95rem;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .activity-notes {
+        font-size: 0.85rem;
+        max-height: 80px;
+        overflow-y: auto;
+        padding-right: 5px;
+        margin-top: 6px;
+    }
+
+    .activity-actions {
+        order: 2;
+        display: flex;
+        gap: 10px;
+        margin-left: auto;
+    }
+
+    .packing-category {
+        padding: 20px 15px;
+    }
+
+    .packing-items {
+        gap: 8px;
+    }
+
+    .packing-item {
+        flex-wrap: nowrap;
+        padding: 12px 10px;
+        align-items: flex-start;
+    }
+
+    .packing-item input[type="checkbox"] {
+        margin-top: 2px;
+    }
+
+    .packing-item label {
+        font-size: 0.9rem;
+        line-height: 1.3;
+        max-height: 3.9em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    .packing-item:focus-within label,
+    .packing-item.checked label {
+        -webkit-line-clamp: unset;
+        max-height: none;
+    }
+
+    #add-expense-btn,
+    #set-budget-btn {
+        height: 44px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn i {
+        font-size: 14px;
+    }
 }
 
-/* Notification Styles */
+@media (max-width: 480px) {
+    .budget-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .budget-card {
+        padding: 15px;
+        min-height: 90px;
+    }
+
+    .activity-actions {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .delete-activity-btn {
+        margin-left: auto;
+    }
+
+    .packing-item {
+        padding: 10px 8px;
+    }
+
+    .packing-item label {
+        font-size: 0.85rem;
+        -webkit-line-clamp: 2;
+    }
+
+    .packing-item-delete-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.85rem;
+    }
+}
+
 @keyframes slideIn {
     from {
         transform: translateX(100%);
