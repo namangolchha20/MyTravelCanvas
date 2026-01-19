@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyTravelCanvas | Smart Trip Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-plane"></i>
+                <h1>MyTravelCanvas</h1>
+            </div>
+            <p class="tagline">-Paint Your Perfect Journey</p>
+
+            <!-- Theme Toggle Button -->
+            <div class="theme-toggle">
+                <button id="theme-toggle-btn" class="theme-btn" title="Toggle dark/light mode">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Trips List Section -->
+            <section class="trips-section" id="trips-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-suitcase"></i> My Trips</h2>
+                    <button class="btn btn-primary" id="add-trip-btn">
+                        <i class="fas fa-plus"></i> New Trip
+                    </button>
+                </div>
+                <div class="trips-container" id="trips-container">
+                    <!-- Trips will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- Trip Details Section -->
+            <section class="trip-details-section" id="trip-details-section" style="display: none;">
+                <div class="section-header">
+                    <h2 id="trip-details-title"></h2>
+                    <button class="btn btn-secondary" id="back-to-trips">
+                        <i class="fas fa-arrow-left"></i> Back to Trips
+                    </button>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="itinerary">
+                        <i class="fas fa-calendar-alt"></i> Itinerary
+                    </button>
+                    <button class="tab-btn" data-tab="budget">
+                        <i class="fas fa-wallet"></i> Budget
+                    </button>
+                    <button class="tab-btn" data-tab="packing">
+                        <i class="fas fa-suitcase-rolling"></i> Packing
+                    </button>
+                    <button class="tab-btn" data-tab="summary">
+                        <i class="fas fa-chart-pie"></i> Summary
+                    </button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- Itinerary Tab -->
+                    <div id="itinerary-tab" class="tab-pane active">
+                        <div class="tab-header">
+                            <h3><i class="fas fa-route"></i> Day-Wise Itinerary</h3>
+                            <button class="btn btn-sm" id="add-activity-btn">
+                                <i class="fas fa-plus"></i> Add Activity
+                            </button>
+                        </div>
+                        <div class="days-container" id="days-container">
+                            <!-- Days will be dynamically added here -->
+                        </div>
+                    </div>
+
+                    <!-- Budget Tab -->
+                    <div id="budget-tab" class="tab-pane">
+                        <!-- Budget Overview -->
+                        <div class="budget-overview">
+                            <div class="budget-card">
+                                <h4><i class="fas fa-money-bill-wave"></i> Total Budget</h4>
+                                <p class="budget-amount" id="total-budget">₹0</p>
+                            </div>
+                            <div class="budget-card">
+                                <h4><i class="fas fa-coins"></i> Total Spent</h4>
+                                <p class="budget-spent" id="total-spent">₹0</p>
+                            </div>
+                            <div class="budget-card">
+                                <h4><i class="fas fa-piggy-bank"></i> Remaining</h4>
+                                <p class="budget-remaining" id="remaining-budget">₹0</p>
+                            </div>
+                            <div class="budget-card">
+                                <h4><i class="fas fa-percentage"></i> Used</h4>
+                                <p class="budget-percentage" id="budget-percentage">0%</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Budget Controls -->
+                        <div class="budget-controls">
+                            <div class="form-group">
+                                <label for="budget-input"><i class="fas fa-edit"></i> Set Trip Budget</label>
+                                <div class="input-with-btn">
+                                    <input type="number" id="budget-input" placeholder="Enter amount" min="0">
+                                    <button class="btn btn-primary" id="set-budget-btn">Set</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="expense-category"><i class="fas fa-receipt"></i> Add Expense</label>
+                                <div class="expense-form">
+                                    <select id="expense-category">
+                                        <option value="food">Food & Dining</option>
+                                        <option value="stay">Accommodation</option>
+                                        <option value="transport">Transport</option>
+                                        <option value="shopping">Shopping</option>
+                                        <option value="activities">Activities</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <input type="number" id="expense-amount" placeholder="Amount" min="0">
+                                    <select id="expense-day">
+                                        <!-- Days will be dynamically added -->
+                                    </select>
+                                    <input type="text" id="expense-description" placeholder="Description (optional)">
+                                    <button class="btn btn-primary" id="add-expense-btn">Add</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Expenses List -->
+                        <div class="expenses-list">
+                            <h4><i class="fas fa-list"></i> Expense History</h4>
+                            <div class="expenses-container" id="expenses-container">
+                                <p class="empty-text">No expenses added yet</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Packing Tab -->
+                    <div id="packing-tab" class="tab-pane">
+                        <div class="packing-header">
+                            <div class="packing-progress">
+                                <h4><i class="fas fa-check-circle"></i> Packing Progress</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="packing-progress-fill" style="width: 0%"></div>
+                                </div>
+                                <p class="progress-text" id="packing-progress-text">0% Complete</p>
+                            </div>
+                            <button class="btn btn-primary" id="add-custom-item-btn">
+                                <i class="fas fa-plus"></i> Add Custom Item
+                            </button>
+                        </div>
+
+                        <div class="packing-lists" id="packing-lists">
+                            <!-- Packing lists will be dynamically generated -->
+                        </div>
+                    </div>
+
+                    <!-- Summary Tab -->
+                    <div id="summary-tab" class="tab-pane">
+                        <div class="summary-cards">
+                            <div class="summary-card">
+                                <div class="summary-icon">
+                                    <i class="fas fa-calendar-day"></i>
+                                </div>
+                                <div class="summary-info">
+                                    <h4>Trip Duration</h4>
+                                    <p class="summary-value" id="summary-days">0 days</p>
+                                </div>
+                            </div>
+                            <div class="summary-card">
+                                <div class="summary-icon">
+                                    <i class="fas fa-tasks"></i>
+                                </div>
+                                <div class="summary-info">
+                                    <h4>Activities Planned</h4>
+                                    <p class="summary-value" id="summary-activities">0</p>
+                                </div>
+                            </div>
+                            <div class="summary-card">
+                                <div class="summary-icon">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <div class="summary-info">
+                                    <h4>Budget Used</h4>
+                                    <p class="summary-value" id="summary-budget">0%</p>
+                                </div>
+                            </div>
+                            <div class="summary-card">
+                                <div class="summary-icon">
+                                    <i class="fas fa-suitcase"></i>
+                                </div>
+                                <div class="summary-info">
+                                    <h4>Packing Complete</h4>
+                                    <p class="summary-value" id="summary-packing">0%</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Summary Details -->
+                        <div class="summary-details">
+                            <div class="detail-card">
+                                <h4><i class="fas fa-info-circle"></i> Trip Information</h4>
+                                <ul id="trip-info-list">
+                                    <!-- Trip info will be added here -->
+                                </ul>
+                            </div>
+                            <div class="detail-card">
+                                <h4><i class="fas fa-chart-bar"></i> Budget Breakdown</h4>
+                                <div class="budget-bars" id="budget-bars">
+                                    <!-- Budget bars will be added here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modals -->
+        <!-- Creating Trip -->
+        <div class="modal" id="add-trip-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-plus-circle"></i> Create New Trip</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="trip-form">
+                        <div class="form-group">
+                            <label for="destination"><i class="fas fa-map-marker-alt"></i> Destination</label>
+                            <input type="text" id="destination" required placeholder="e.g., Dubai, Mauritius">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="start-date"><i class="fas fa-calendar"></i> Start Date</label>
+                                <input type="date" id="start-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="end-date"><i class="fas fa-calendar"></i> End Date</label>
+                                <input type="date" id="end-date" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="trip-type"><i class="fas fa-tag"></i> Trip Type</label>
+                            <select id="trip-type" required>
+                                <option value="beach">Beach Vacation</option>
+                                <option value="winter">Winter Trip</option>
+                                <option value="city">City Tour</option>
+                                <option value="business">Business Trip</option>
+                                <option value="mountain">Mountain</option>
+                                <option value="forest">Forest</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Create Trip</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Adding Activity -->    
+        <div class="modal" id="add-activity-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-plus-circle"></i> Add Activity</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="activity-form">
+                        <div class="form-group">
+                            <label for="activity-day"><i class="fas fa-calendar-day"></i> Day</label>
+                            <select id="activity-day" required>
+                                <!-- Days will be populated dynamically -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="activity-title"><i class="fas fa-pen"></i> Activity Title</label>
+                            <input type="text" id="activity-title" required placeholder="e.g., Visit Burj Khalifa">
+                        </div>
+                        <div class="form-group">
+                            <label for="activity-time"><i class="fas fa-clock"></i> Time</label>
+                            <input type="time" id="activity-time" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="activity-notes"><i class="fas fa-sticky-note"></i> Notes (Optional)</label>
+                            <textarea id="activity-notes" rows="3" placeholder="Any additional details..."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Add Activity</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Adding Custom Item -->
+        <div class="modal" id="add-custom-item-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-plus-circle"></i> Add Custom Packing Item</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="custom-item-form">
+                        <div class="form-group">
+                            <label for="custom-item-name"><i class="fas fa-cube"></i> Item Name</label>
+                            <input type="text" id="custom-item-name" required placeholder="e.g., Travel Adapter">
+                        </div>
+                        <div class="form-group">
+                            <label for="custom-item-category"><i class="fas fa-folder"></i> Category</label>
+                            <select id="custom-item-category" required>
+                                <option value="clothes">Clothing</option>
+                                <option value="accessories">Accessories</option>
+                                <option value="toiletries">Toiletries</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="documents">Documents</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Add Item</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Delete Trip Confirmation Modal -->
+        <div class="modal" id="delete-trip-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Delete Trip</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="delete-warning">
+                        <i class="fas fa-trash-alt"></i>
+                        <p>Are you sure you want to delete this trip? This action cannot be undone.</p>
+                    </div>
+                    <div class="trip-to-delete-info" id="trip-to-delete-info">
+                        <!-- Trip info will be inserted here -->
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="confirm-delete-btn">Delete Trip</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Activity Confirmation Modal -->
+        <div class="modal" id="delete-activity-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Delete Activity</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="delete-warning">
+                        <i class="fas fa-trash-alt"></i>
+                        <p>Are you sure you want to delete this activity? This action cannot be undone.</p>
+                    </div>
+                    <div class="activity-to-delete-info" id="activity-to-delete-info">
+                        <!-- Activity info will be inserted here -->
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="confirm-delete-activity-btn">Delete Activity</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>MyTravelCanvas • Smart Trip Planner by Naman Golchha</p>
+            <p class="footer-quote" id="quote-display">
+                <!-- Rotating Quotes -->
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
