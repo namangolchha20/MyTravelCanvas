@@ -1,5 +1,7 @@
 # MyTravelCanvas – Smart Trip Planner 🌍✈️
 
+## **Try it here:** [🔗MyTravelCanvas](https://namangolchha20.github.io/MyTravelCanvas/)
+
 ## 📋 Overview
 **MyTravelCanvas** is an interactive, all-in-one trip planning web application designed to simplify travel organization.  
 Built as my **Trimester 2 End Term Project**, it combines itinerary management, budget tracking, packing lists, and trip summaries into a single, intuitive interface.
@@ -130,6 +132,8 @@ setTimeout()
 setInterval()
 ```
 
+---
+
 ## ▶️ Getting Started
 
 ### Prerequisites
@@ -144,11 +148,15 @@ setInterval()
 
 > The application runs completely on the frontend and does not require a backend.
 
+---
+
 ## ⚠️ Known Limitations
 - No backend integration (data stored only in browser `localStorage`)
 - Data will be lost if browser storage is cleared
 - No user authentication or multi-user support
 - Budget supports numeric values only (no currency conversion)
+
+---
 
 ## 🚀 Future Improvements
 - Backend support with authentication
@@ -157,6 +165,8 @@ setInterval()
 - Export itinerary as PDF
 - Currency conversion support
 - Integration with maps and location services
+
+---
 
 ## 👨‍💻 Author
 **Naman Golchha**  
